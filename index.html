@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holders Info</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
 
+    <h2>Holders Info</h2>
+    <table id="holdersTable">
+        <thead>
+            <tr>
+                <th>Wallet Address</th>
+                <th>NFTs Owned</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const SPREADSHEET_ID = "13rV_3S7-UrIMLOWQuxzGAmDh3PU-YFh0rCJIedjWB3g";
+        const API_KEY = "AIzaSyCxOYcsFLRVeVjGSPfaf2zifyAw_KWmPiU";
+        const SHEET_NAME = "Holders_Info";
+        
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.querySelector("#holdersTable tbody");
+                const rows = data.values.slice(1); // Skip headers
+                
+                rows.forEach(row => {
+                    let tr = document.createElement("tr");
+                    tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td>`;
+                    tableBody.appendChild(tr);
+                });
+            })
+            .catch(error => console.error("Error fetching data:", error));
+    </script>
+
+</body>
+</html>
