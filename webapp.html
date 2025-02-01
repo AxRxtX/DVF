@@ -3,20 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sheet Live Data</title>
+    <title>Holders Live Data</title>
 </head>
 <body>
-    <h1>Google Sheet Data</h1>
+    <h1>Holders Data</h1>
     <pre id="sheetData">Loading...</pre>
 
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Discord Name</th>
+                <th>ClubGG Name</th>
+                <th>NFT Balance</th>
+                <th>NFT Eligible</th>
+                <th>EOM Points</th>
+            </tr>
+        </thead>
+        <tbody id="sheetTableBody"></tbody>
+    </table>
+
+    
     <script>
         function fetchSheetData() {
             fetch('https://script.google.com/macros/s/AKfycbxEiSCD6W0dDWQ5A0h9ErRx4x98mIoxN24bSPzVNAYdB4b_-3TcrH4FMW_XyW5ukB50/exec')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("sheetData").innerText = JSON.stringify(data, null, 2);
-                })
-                .catch(error => console.error("Error fetching data:", error));
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById("sheetTableBody");
+                tableBody.innerHTML = ""; // Clear previous data
+                
+                data.forEach(row => {
+                    if (row[4] > 0) { // Column 5 value must be > 0
+                        let tr = document.createElement("tr");
+                        tr.innerHTML = `
+                            <td>${row[1]}</td> <!-- Column 2 -->
+                            <td>${row[2]}</td> <!-- Column 3 -->
+                            <td>${row[4]}</td> <!-- Column 4 -->
+                            <td>${row[6]}</td> <!-- Column 7 -->
+                            <td>${row[7]}</td> <!-- Column 8 -->
+                        `;
+                        tableBody.appendChild(tr);
+                    }
+                });
+            })
+            .catch(error => console.error("Error fetching data:", error));
+        
+        
+        
+        
         }
 
         setInterval(fetchSheetData, 600000); // Refresh data every 5 seconds
