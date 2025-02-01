@@ -11,7 +11,7 @@
 
     <script>
         function fetchSheetData() {
-            fetch('YOUR_GOOGLE_APPS_SCRIPT_URL')
+            fetch('https://script.google.com/macros/s/AKfycbxEiSCD6W0dDWQ5A0h9ErRx4x98mIoxN24bSPzVNAYdB4b_-3TcrH4FMW_XyW5ukB50/exec')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById("sheetData").innerText = JSON.stringify(data, null, 2);
