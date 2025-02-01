@@ -101,7 +101,7 @@
                 }
                 // If Balance is the same, sort by ClubGG Name (Column 3) in ascending order
                 return a[2].localeCompare(b[2]); // ClubGG Name ascending
-
+            });
                 
                 data.forEach(row => {
                     if (row[4] > 0 && row[1].trim() !== "") { // Balance must be > 0 AND Discord name not empty                        
