@@ -28,7 +28,7 @@
         table {
             border-collapse: collapse;
             width: 60%; /* Reduce table width */
-            border: 1px solid red; /* Thin border */
+            border: 1px solid #8B0000; /* Thin border */
         }
 
         th, td {
@@ -93,7 +93,7 @@
                 tableBody.innerHTML = ""; // Clear previous data
                 
                 data.forEach(row => {
-                    if (row[4] > 0) { // Column 5 value must be > 0
+                    if (row[4] > 0 && row[1].trim() !== "") { // Balance must be > 0 AND Discord name not empty                        
                         let tr = document.createElement("tr");
                         tr.innerHTML = `
                             <td>${row[1]}</td> <!-- Column 2 -->
