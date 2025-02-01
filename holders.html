@@ -92,6 +92,16 @@
             .then(data => {
                 const tableBody = document.getElementById("sheetTableBody");
                 tableBody.innerHTML = ""; // Clear previous data
+
+            // Sort data by Balance (Column 5, descending) first, then by ClubGG Name (Column 3, ascending)
+            data.sort((a, b) => {
+                // Sort by Balance (Column 5) in descending order
+                if (b[4] !== a[4]) {
+                    return b[4] - a[4]; // Balance descending
+                }
+                // If Balance is the same, sort by ClubGG Name (Column 3) in ascending order
+                return a[2].localeCompare(b[2]); // ClubGG Name ascending
+
                 
                 data.forEach(row => {
                     if (row[4] > 0 && row[1].trim() !== "") { // Balance must be > 0 AND Discord name not empty                        
@@ -109,7 +119,6 @@
             })
     
                 .catch(error => console.error("Error fetching data:", error));
-        
         }
 
         setInterval(fetchSheetData, 600000); // Refresh data every 10 minutes (600 seconds)
