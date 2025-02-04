@@ -145,7 +145,7 @@
     document.querySelectorAll("#holdersTable tbody tr").forEach(row => {
         row.addEventListener("click", function () {
             let holderKey = this.dataset.holderKey; // Retrieve stored key
-            console.log(`🖱 Clicked Row v2, Key: ${holderKey}`);
+            console.log(`🖱 Clicked Row v3, Key: ${holderKey}`);
             showLastTx(holderKey, lastTxData);
         });
     });
@@ -156,31 +156,38 @@
             
         }
 
-        function showLastTx(holderKey, lastTxData) {
-            console.log("🔎 Filtering Transactions for:", holderKey);
-        
-            // const filteredTxs = lastTxData.filter(tx => tx[3] === holderKey && tx[7] === "");
-            const filteredTxs = lastTxData.filter(tx => String(tx[3]) === String(holderKey) && tx[7] === "");
-        
-            const lastTxTable = document.getElementById("lastTxTable").querySelector("tbody");
-            lastTxTable.innerHTML = "";
-        
-            if (filteredTxs.length === 0) {
-                lastTxTable.innerHTML = "<tr><td colspan='2'>No transactions found.</td></tr>";
-                return;
-            }
-        
-            filteredTxs.forEach(tx => {
-                let tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td>${tx[0]}</td> <!-- NFT ID -->
-                    <td>${tx[6]}</td> <!-- Age (Days) -->
-                `;
-                lastTxTable.appendChild(tr);
-            });
-        
-            console.log("✅ Table 2 Updated");
-        }
+function showLastTx(holderKey, lastTxData) {
+    console.log("🔎 Filtering Transactions for:", holderKey);
+
+    // Debug: Log LastTX first to verify data
+    console.log("📋 LastTX Data:", lastTxData);
+
+    // Ensure filtering works by converting both to strings
+    const filteredTxs = lastTxData.filter(tx => String(tx[3]) === String(holderKey) && tx[7] === "");
+
+    console.log("✅ Filtered Transactions:", filteredTxs);
+
+    const lastTxTable = document.getElementById("lastTxTable").querySelector("tbody");
+    lastTxTable.innerHTML = "";
+
+    if (filteredTxs.length === 0) {
+        console.log("⚠️ No matching transactions found.");
+        lastTxTable.innerHTML = "<tr><td colspan='2'>No transactions found.</td></tr>";
+        return;
+    }
+
+    filteredTxs.forEach(tx => {
+        let tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${tx[0]}</td> <!-- NFT ID -->
+            <td>${tx[6]}</td> <!-- Age (Days) -->
+        `;
+        lastTxTable.appendChild(tr);
+    });
+
+    console.log("✅ Table 2 Updated");
+}
+
 
 
         loadTables();
