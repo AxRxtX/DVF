@@ -132,8 +132,6 @@
             <tbody></tbody>
         </table>
 
-        <button onclick="showHolders()">Back to Holders Table</button>
-        
     </div>
 
     <script>
@@ -266,6 +264,10 @@
         console.log("✅ Table 2 Updated");
     }
 
+    // Add click listener to Table 2 to go back to Table 1
+    document.getElementById("lastTxTable").addEventListener("click", function() {
+        showHolders(); // When Table 2 is clicked, show Table 1 again
+    });
 
   
     function showHolders() {
