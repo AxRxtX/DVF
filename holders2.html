@@ -204,8 +204,13 @@
         // Create a new Table 2 (filtered transactions)
         const lastTxTable = document.createElement("table");
         lastTxTable.id = "lastTxTable";
-        lastTxTable.style.display = "block"; // Ensure Table 2 is visible
-    
+
+        
+        //lastTxTable.style.display = "block"; // Ensure Table 2 is visible
+        // Explicitly set the width of Table 2 to 40%
+        lastTxTable.style.width = "40%";
+        lastTxTable.style.margin = "0 auto"; // Ensure it is centered
+        
         lastTxTable.innerHTML = `
             <thead>
                 <tr>
