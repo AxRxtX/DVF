@@ -190,6 +190,10 @@
 
 
     function showLastTx(holderKey, lastTxData) {
+
+        document.getElementById("holdersTable").style.display = "none"; // Hide Table 1
+        document.getElementById("lastTxTable").style.display = "table"; // Show Table 2
+        
         console.log("🔎 Filtering Transactions for:", holderKey);
     
         // Debug: Log LastTX first to verify data
@@ -255,15 +259,19 @@
     
         // Append the new Table 2 to the container
         container.appendChild(lastTxTable);
-    
+
+        <button onclick="showHolders()">Back to Holders Table</button>
+        
         console.log("✅ Table 2 Updated");
     }
 
 
   
-
+    function showHolders() {
+        document.getElementById("holdersTable").style.display = "table"; // Show Table 1
+        document.getElementById("lastTxTable").style.display = "none"; // Hide Table 2
+    }
         
-
 
 
         loadTables();
