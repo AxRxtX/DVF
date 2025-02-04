@@ -178,10 +178,8 @@
     });
 
     console.log("Click Events Attached");
-
-
             
-        }
+    }
 
 function showLastTx(holderKey, lastTxData) {
     console.log("🔎 Filtering Transactions for:", holderKey);
@@ -193,22 +191,27 @@ function showLastTx(holderKey, lastTxData) {
 
     console.log("✅ Filtered Transactions:", filteredTxs);
 
+    const container = document.querySelector('.container'); // Get the main container
     const holdersTable = document.getElementById("holdersTable");
-    const lastTxTable = document.getElementById("lastTxTable").querySelector("tbody");
+    
+    // Clear any existing tables in the container (including Table 1)
+    container.innerHTML = "";
 
-    // Hide Table 1 and show Table 2
-    holdersTable.style.display = "none";
-    document.getElementById("lastTxTable").style.display = "block"; // Show Table 2
+    // Create a new Table 2 (filtered transactions)
+    const lastTxTable = document.createElement("table");
+    lastTxTable.id = "lastTxTable";
+    lastTxTable.innerHTML = `
+        <thead>
+            <tr>
+                <th>NFT ID</th>
+                <th>Age (Days)</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    `;
+    const lastTxTableBody = lastTxTable.querySelector("tbody");
 
-    // Clear Table 2 content before adding new data
-    lastTxTable.innerHTML = "";
-
-    if (filteredTxs.length === 0) {
-        console.log("⚠️ No matching transactions found.");
-        lastTxTable.innerHTML = "<tr><td colspan='2'>No transactions found.</td></tr>";
-        return;
-    }
-
+    // Populate Table 2 with filtered transactions
     filteredTxs.forEach(tx => {
         let age = parseFloat(tx[5]).toFixed(2); // Column 6 (Age) rounded to 2 decimals
         let hasValueInColumn7 = tx[6] !== ""; // Column 7 is NOT empty
@@ -222,11 +225,16 @@ function showLastTx(holderKey, lastTxData) {
             <td>${tx[0]}</td> <!-- NFT ID -->
             <td>${status}</td> <!-- Age or "Listed on OS" -->
         `;
-        lastTxTable.appendChild(tr);
+        lastTxTableBody.appendChild(tr);
     });
+
+    // Append the new Table 2 to the container
+    container.appendChild(lastTxTable);
 
     console.log("✅ Table 2 Updated");
 }
+
+        
 
 
 
