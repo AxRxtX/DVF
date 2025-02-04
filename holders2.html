@@ -159,7 +159,8 @@
         function showLastTx(holderKey, lastTxData) {
             console.log("🔎 Filtering Transactions for:", holderKey);
         
-            const filteredTxs = lastTxData.filter(tx => tx[3] === holderKey && tx[7] === "");
+            // const filteredTxs = lastTxData.filter(tx => tx[3] === holderKey && tx[7] === "");
+            const filteredTxs = lastTxData.filter(tx => String(tx[3]) === String(holderKey) && tx[7] === "");
         
             const lastTxTable = document.getElementById("lastTxTable").querySelector("tbody");
             lastTxTable.innerHTML = "";
