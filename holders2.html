@@ -264,10 +264,14 @@
         console.log("✅ Table 2 Updated");
     }
 
-    // Add click listener to Table 2 to go back to Table 1
-    document.getElementById("lastTxTable").addEventListener("dblclick", function() {
-        showHolders(); // When Table 2 is clicked, show Table 1 again
-        console.log(`🖱 DBlClicked Row`);
+    console.log("Table 2 Loaded, Adding DblClick Listeners...");
+
+    // Attach click event to all rows AFTER they are created
+    document.querySelectorAll("#lastTxTable tbody tr").forEach(row => {
+        row.addEventListener("dblclick", function () {
+            console.log(`🖱 DblClicked Row`);
+            showHolders();
+        });
     });
 
   
