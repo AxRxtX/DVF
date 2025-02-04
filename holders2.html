@@ -133,16 +133,27 @@
                         <td>${row[7]}</td> <!-- EOM Points -->
                     `;
 
-                    // Attach onClick event to filter LastTX data
-                    tr.addEventListener("click", function () {
-                        showLastTx(row[4], lastTxData); // Pass Column [4] value as key
-                    });
-
+                    tr.dataset.holderKey = row[4]; // Store Column [4] as a data attribute
                     holdersTable.appendChild(tr);
-
-                    
+                   
                 }
             });
+
+    console.log("Table 1 Loaded, Adding Click Listeners...");
+
+    // Attach click event to all rows AFTER they are created
+    document.querySelectorAll("#holdersTable tbody tr").forEach(row => {
+        row.addEventListener("click", function () {
+            let holderKey = this.dataset.holderKey; // Retrieve stored key
+            console.log(`🖱 Clicked Row, Key: ${holderKey}`);
+            showLastTx(holderKey, lastTxData);
+        });
+    });
+
+    console.log("Click Events Attached");
+
+
+            
         }
 
         function showLastTx(holderKey, lastTxData) {
