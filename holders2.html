@@ -180,8 +180,14 @@ function showLastTx(holderKey, lastTxData) {
 
     filteredTxs.forEach(tx => {
         let age = tx[5]; // Column 6 (Age)
-        let status = age < 30 ? age : "Listed on OS"; // If Age < 30, display Age, else "Listed on OS"
+        let hasValueInColumn7 = tx[6] !== ""; // Column 7 is NOT empty
 
+        // Apply logic: If Column 7 is not empty, then check Age
+        let status = hasValueInColumn7 
+            ? (age < 30 ? age : "Listed on OS") 
+            : age; // If Column 7 is empty, just display Age normally
+
+        
         let tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${tx[0]}</td> <!-- NFT ID -->
