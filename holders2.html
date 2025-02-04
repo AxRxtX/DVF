@@ -145,7 +145,7 @@
     document.querySelectorAll("#holdersTable tbody tr").forEach(row => {
         row.addEventListener("click", function () {
             let holderKey = this.dataset.holderKey; // Retrieve stored key
-            console.log(`🖱 Clicked Row v4, Key: ${holderKey}`);
+            console.log(`🖱 Clicked Row v5, Key: ${holderKey}`);
             showLastTx(holderKey, lastTxData);
         });
     });
@@ -163,7 +163,9 @@ function showLastTx(holderKey, lastTxData) {
     console.log("📋 LastTX Data:", lastTxData);
 
     // Ensure filtering works by converting both to strings
-    const filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey) && tx[6] === "");
+    // const filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey) && tx[6] === "");
+    const filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey));
+
 
     console.log("✅ Filtered Transactions:", filteredTxs);
 
@@ -177,10 +179,13 @@ function showLastTx(holderKey, lastTxData) {
     }
 
     filteredTxs.forEach(tx => {
+        let age = tx[5]; // Column 6 (Age)
+        let status = age < 30 ? age : "Listed on OS"; // If Age < 30, display Age, else "Listed on OS"
+
         let tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${tx[0]}</td> <!-- NFT ID -->
-            <td>${tx[5]}</td> <!-- Age (Days) -->
+            <td>${status}</td> <!-- Age or "Listed on OS" -->
         `;
         lastTxTable.appendChild(tr);
     });
