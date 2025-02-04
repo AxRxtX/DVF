@@ -179,7 +179,7 @@ function showLastTx(holderKey, lastTxData) {
     }
 
     filteredTxs.forEach(tx => {
-        let age = tx[5]; // Column 6 (Age)
+        let age = parseFloat(tx[5]).toFixed(2); // Column 6 (Age) rounded to 2 decimals
         let hasValueInColumn7 = tx[6] !== ""; // Column 7 is NOT empty
 
         // Apply logic: If Column 7 is not empty, then check Age
