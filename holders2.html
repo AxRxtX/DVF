@@ -263,29 +263,22 @@
 
         console.log("✅ Table 2 Updated");
 
-        console.log("Table 2 Loaded, Adding DblClick Listeners...");
+        console.log("Table 2 Loaded, Adding Click Listeners...");
         
         // Attach click event to all rows AFTER they are created
         document.querySelectorAll("#lastTxTable tbody tr").forEach(row => {
-            row.addEventListener("dblclick", function () {
-                console.log(`🖱 DblClicked Row`);
+            row.addEventListener("click", function () {
+                console.log(`🖱 Clicked Row`);
                 showHolders();
             });
         });
         
     }
 
-
-
-
-
-  
     function showHolders() {
         document.getElementById("holdersTable").style.display = "table"; // Show Table 1
         document.getElementById("lastTxTable").style.display = "none"; // Hide Table 2
     }
-        
-
 
         loadTables();
     </script>
