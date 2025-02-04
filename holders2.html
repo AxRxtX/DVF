@@ -269,18 +269,15 @@
         document.querySelectorAll("#lastTxTable tbody tr").forEach(row => {
             row.addEventListener("click", function () {
                 console.log(`🖱 Clicked Row`);
-                showHolders();
+                loadTables();
             });
         });
         
     }
 
-    function showHolders() {
-        document.getElementById("holdersTable").style.display = "table"; // Show Table 1
-        document.getElementById("lastTxTable").style.display = "none"; // Hide Table 2
-    }
-
-        loadTables();
+        
+    loadTables();
+    
     </script>
 </body>
 
