@@ -145,7 +145,7 @@
     document.querySelectorAll("#holdersTable tbody tr").forEach(row => {
         row.addEventListener("click", function () {
             let holderKey = this.dataset.holderKey; // Retrieve stored key
-            console.log(`🖱 Clicked Row, Key: ${holderKey}`);
+            console.log(`🖱 Clicked Row v2, Key: ${holderKey}`);
             showLastTx(holderKey, lastTxData);
         });
     });
