@@ -76,16 +76,25 @@
         margin: 0 auto; /* Center the table horizontally */
         }
         
-    #lastTxTable {
-        display: none; /* Ensure Table 2 is visible */
-        width: 40% !important; /* Table 2 gets 40% width */
-        margin: 0 auto; /* Center Table 2 */
-        border: 2px solid #8B0000; /* Optional border styling */
-    }
-    
-    #lastTxTable td {
-        text-align: center; /* Center the text in both columns */
-    }
+#lastTxTable {
+    display: none; /* Initially hidden */
+    width: 40%; /* Table 2 width */
+    margin: 20px auto; /* Add margin for spacing and center the table */
+    border: 2px solid #8B0000; /* Optional: Adjust border styling */
+    border-collapse: collapse; /* Ensure borders collapse properly */
+}
+
+#lastTxTable th, #lastTxTable td {
+    padding: 8px;
+    text-align: center; /* Center text in both header and cells */
+    border: 1px solid #8B0000; /* Border for cells */
+}
+
+#lastTxTable td {
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+}
 
         
     </style>
