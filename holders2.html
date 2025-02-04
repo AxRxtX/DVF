@@ -267,12 +267,24 @@
         document.querySelectorAll("#lastTxTable tbody tr").forEach(row => {
             row.addEventListener("click", function () {
                 console.log(`🖱 Clicked Row`);
-                loadTables();
+                showHolders();
             });
         });
         
     }
 
+    function showHolders() {
+        const holdersTable = document.getElementById("holdersTable");
+        if (holdersTable) {
+            holdersTable.style.display = "table"; // Show Table 1
+        }
+    
+        const lastTxTable = document.getElementById("lastTxTable");
+        if (lastTxTable) {
+            lastTxTable.style.display = "none"; // Hide Table 2
+        }
+    }
+        
         
     loadTables();
     
