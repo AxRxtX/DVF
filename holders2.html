@@ -180,7 +180,6 @@
     }
 
 
-
     function showLastTx(holderKey, lastTxData) {
         console.log("🔎 Filtering Transactions for:", holderKey);
     
@@ -197,13 +196,17 @@
         // Clear any existing tables in the container (including Table 1)
         container.innerHTML = "";
     
+        // Add the title for Table 2
+        const title = document.createElement("h1");
+        title.textContent = "NFT Eligibility";
+        container.appendChild(title); // Append the title to the container
+    
         // Create a new Table 2 (filtered transactions)
         const lastTxTable = document.createElement("table");
         lastTxTable.id = "lastTxTable";
         lastTxTable.style.display = "block"; // Ensure Table 2 is visible
     
         lastTxTable.innerHTML = `
-            <h1>NFT Eligibility</h1>
             <thead>
                 <tr>
                     <th>NFT ID</th>
@@ -243,6 +246,8 @@
         console.log("✅ Table 2 Updated");
     }
 
+
+  
 
         
 
