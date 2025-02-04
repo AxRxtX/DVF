@@ -76,16 +76,16 @@
         margin: 0 auto; /* Center the table horizontally */
         }
     
-        #lastTxTable {
-            display: none; /* Hide Table 2 initially */
-            width: 40%;
-            border: 2px solid #8B0000;
-            margin: 0 auto;
-        }
-        
-        #lastTxTable td {
-            text-align: center; /* Center the text in both columns */
-        }
+#lastTxTable {
+    display: none; /* Hide Table 2 initially */
+    width: 40% !important; /* Ensure Table 2 is 40% width, overriding any parent container */
+    border: 2px solid #8B0000;
+    margin: 0 auto; /* Center it */
+}
+
+#lastTxTable td {
+    text-align: center; /* Center the text in both columns */
+}
 
         
     </style>
@@ -181,58 +181,69 @@
             
     }
 
-function showLastTx(holderKey, lastTxData) {
-    console.log("🔎 Filtering Transactions for:", holderKey);
 
-    // Debug: Log LastTX first to verify data
-    console.log("📋 LastTX Data:", lastTxData);
 
-    const filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey));
-
-    console.log("✅ Filtered Transactions:", filteredTxs);
-
-    const container = document.querySelector('.container'); // Get the main container
-    const holdersTable = document.getElementById("holdersTable");
+    function showLastTx(holderKey, lastTxData) {
+        console.log("🔎 Filtering Transactions for:", holderKey);
     
-    // Clear any existing tables in the container (including Table 1)
-    container.innerHTML = "";
-
-    // Create a new Table 2 (filtered transactions)
-    const lastTxTable = document.createElement("table");
-    lastTxTable.id = "lastTxTable";
-    lastTxTable.innerHTML = `
-        <thead>
-            <tr>
-                <th>NFT ID</th>
-                <th>Age (Days)</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    `;
-    const lastTxTableBody = lastTxTable.querySelector("tbody");
-
-    // Populate Table 2 with filtered transactions
-    filteredTxs.forEach(tx => {
-        let age = parseFloat(tx[5]).toFixed(2); // Column 6 (Age) rounded to 2 decimals
-        let hasValueInColumn7 = tx[6] !== ""; // Column 7 is NOT empty
-
-        let status = hasValueInColumn7 
-            ? (age < 30 ? age : "Listed on OS") 
-            : age; // If Column 7 is empty, just display Age normally
-
-        let tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td>${tx[0]}</td> <!-- NFT ID -->
-            <td>${status}</td> <!-- Age or "Listed on OS" -->
+        // Debug: Log LastTX first to verify data
+        console.log("📋 LastTX Data:", lastTxData);
+    
+        const filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey));
+    
+        console.log("✅ Filtered Transactions:", filteredTxs);
+    
+        const container = document.querySelector('.container'); // Get the main container
+        const holdersTable = document.getElementById("holdersTable");
+    
+        // Clear any existing tables in the container (including Table 1)
+        container.innerHTML = "";
+    
+        // Create a new Table 2 (filtered transactions)
+        const lastTxTable = document.createElement("table");
+        lastTxTable.id = "lastTxTable";
+        lastTxTable.style.display = "block"; // Ensure Table 2 is visible
+    
+        lastTxTable.innerHTML = `
+            <thead>
+                <tr>
+                    <th>NFT ID</th>
+                    <th>Age (Days)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
         `;
-        lastTxTableBody.appendChild(tr);
-    });
+    
+        const lastTxTableBody = lastTxTable.querySelector("tbody");
+    
+        // Populate Table 2 with filtered transactions
+        if (filteredTxs.length === 0) {
+            console.log("⚠️ No matching transactions found.");
+            lastTxTableBody.innerHTML = "<tr><td colspan='2'>No transactions found.</td></tr>";
+        } else {
+            filteredTxs.forEach(tx => {
+                let age = parseFloat(tx[5]).toFixed(2); // Column 6 (Age) rounded to 2 decimals
+                let hasValueInColumn7 = tx[6] !== ""; // Column 7 is NOT empty
+    
+                let status = hasValueInColumn7 
+                    ? (age < 30 ? age : "Listed on OS") 
+                    : age; // If Column 7 is empty, just display Age normally
+    
+                let tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${tx[0]}</td> <!-- NFT ID -->
+                    <td>${status}</td> <!-- Age or "Listed on OS" -->
+                `;
+                lastTxTableBody.appendChild(tr);
+            });
+        }
+    
+        // Append the new Table 2 to the container
+        container.appendChild(lastTxTable);
+    
+        console.log("✅ Table 2 Updated");
+    }
 
-    // Append the new Table 2 to the container
-    container.appendChild(lastTxTable);
-
-    console.log("✅ Table 2 Updated");
-}
 
         
 
