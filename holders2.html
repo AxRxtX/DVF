@@ -195,7 +195,7 @@
         // Debug: Log LastTX first to verify data
         console.log("📋 LastTX Data:", lastTxData);
     
-        const filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey));
+        let filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey));
         filteredTxs = filteredTxs.sort((a, b) => b[5] - a[5]);
 
         
