@@ -70,22 +70,22 @@
         text-overflow: ellipsis; /* Add "..." for long text */
     }
 
-        #holdersTable {
+    #holdersTable {
         width: 60%; /* Table 1 - 60% width */
         border: 2px solid #8B0000; /* Outer border */
         margin: 0 auto; /* Center the table horizontally */
         }
     
-#lastTxTable {
-    display: none; /* Hide Table 2 initially */
-    width: 40% !important; /* Ensure Table 2 is 40% width, overriding any parent container */
-    border: 2px solid #8B0000;
-    margin: 0 auto; /* Center it */
-}
-
-#lastTxTable td {
-    text-align: center; /* Center the text in both columns */
-}
+    #lastTxTable {
+        display: none; /* Hide Table 2 initially */
+        width: 40% !important; /* Ensure Table 2 is 40% width, overriding any parent container */
+        border: 2px solid #8B0000;
+        margin: 0 auto; /* Center it */
+    }
+    
+    #lastTxTable td {
+        text-align: center; /* Center the text in both columns */
+    }
 
         
     </style>
@@ -112,7 +112,7 @@
             <tbody></tbody>
         </table>
 
-        <h1>NFT Eligibility</h1>
+        // <h1>NFT Eligibility</h1>
 
         <!-- Table 2: Filtered Transactions -->
         <table id="lastTxTable">
@@ -205,6 +205,7 @@
         lastTxTable.style.display = "block"; // Ensure Table 2 is visible
     
         lastTxTable.innerHTML = `
+            <h1>NFT Eligibility</h1>
             <thead>
                 <tr>
                     <th>NFT ID</th>
