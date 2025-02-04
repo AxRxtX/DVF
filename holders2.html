@@ -157,12 +157,18 @@
         }
 
         function showLastTx(holderKey, lastTxData) {
+            console.log("🔎 Filtering Transactions for:", holderKey);
+        
             const filteredTxs = lastTxData.filter(tx => tx[3] === holderKey && tx[7] === "");
-            
-            // Display Filtered Transactions (Table 2)
+        
             const lastTxTable = document.getElementById("lastTxTable").querySelector("tbody");
             lastTxTable.innerHTML = "";
-
+        
+            if (filteredTxs.length === 0) {
+                lastTxTable.innerHTML = "<tr><td colspan='2'>No transactions found.</td></tr>";
+                return;
+            }
+        
             filteredTxs.forEach(tx => {
                 let tr = document.createElement("tr");
                 tr.innerHTML = `
@@ -171,7 +177,10 @@
                 `;
                 lastTxTable.appendChild(tr);
             });
+        
+            console.log("✅ Table 2 Updated");
         }
+
 
         loadTables();
     </script>
