@@ -132,8 +132,15 @@
                         <td>${row[6]}</td> <!-- NFT Eligible -->
                         <td>${row[7]}</td> <!-- EOM Points -->
                     `;
-                    tr.onclick = () => showLastTx(row[4], lastTxData); // Pass Column[4] as key
+
+                    // Attach onClick event to filter LastTX data
+                    tr.addEventListener("click", function () {
+                        showLastTx(row[4], lastTxData); // Pass Column [4] value as key
+                    });
+
                     holdersTable.appendChild(tr);
+
+                    
                 }
             });
         }
