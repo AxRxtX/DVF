@@ -77,14 +77,16 @@
         }
     
         #lastTxTable {
-        width: 40%; /* Table 2 - 40% width */
-        border: 2px solid #8B0000; /* Outer border */
-        margin: 0 auto; /* Center the table horizontally */
+            display: none; /* Hide Table 2 initially */
+            width: 40%;
+            border: 2px solid #8B0000;
+            margin: 0 auto;
         }
-
+        
         #lastTxTable td {
             text-align: center; /* Center the text in both columns */
         }
+
         
     </style>
    
@@ -187,14 +189,18 @@ function showLastTx(holderKey, lastTxData) {
     // Debug: Log LastTX first to verify data
     console.log("📋 LastTX Data:", lastTxData);
 
-    // Ensure filtering works by converting both to strings
-    // const filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey) && tx[6] === "");
     const filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey));
-
 
     console.log("✅ Filtered Transactions:", filteredTxs);
 
+    const holdersTable = document.getElementById("holdersTable");
     const lastTxTable = document.getElementById("lastTxTable").querySelector("tbody");
+
+    // Hide Table 1 and show Table 2
+    holdersTable.style.display = "none";
+    document.getElementById("lastTxTable").style.display = "block"; // Show Table 2
+
+    // Clear Table 2 content before adding new data
     lastTxTable.innerHTML = "";
 
     if (filteredTxs.length === 0) {
@@ -207,12 +213,10 @@ function showLastTx(holderKey, lastTxData) {
         let age = parseFloat(tx[5]).toFixed(2); // Column 6 (Age) rounded to 2 decimals
         let hasValueInColumn7 = tx[6] !== ""; // Column 7 is NOT empty
 
-        // Apply logic: If Column 7 is not empty, then check Age
         let status = hasValueInColumn7 
             ? (age < 30 ? age : "Listed on OS") 
             : age; // If Column 7 is empty, just display Age normally
 
-        
         let tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${tx[0]}</td> <!-- NFT ID -->
