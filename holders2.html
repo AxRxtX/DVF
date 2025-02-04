@@ -255,6 +255,12 @@
                     <td>${tx[0]}</td> <!-- NFT ID -->
                     <td>${status}</td> <!-- Age or "Listed on OS" -->
                 `;
+                
+                // Apply green color if Age > 30
+                if (age > 30) {
+                    tr.style.color = "green"; // Change text color to green
+                }
+
                 lastTxTableBody.appendChild(tr);
             });
         }
