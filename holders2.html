@@ -227,7 +227,10 @@
         `;
     
         const lastTxTableBody = lastTxTable.querySelector("tbody");
-    
+        
+        // Sort the data by "Age (Days)" in descending order
+        lastTxData.sort((a, b) => b.age - a.age);
+        
         // Populate Table 2 with filtered transactions
         if (filteredTxs.length === 0) {
             console.log("⚠️ No matching transactions found.");
