@@ -196,7 +196,7 @@
         console.log("📋 LastTX Data:", lastTxData);
     
         const filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey));
-        filteredTxs = filteredTxs.sort((a, b) => b.age - a.age);
+        filteredTxs = filteredTxs.sort((a, b) => b[5] - a[5]);
 
         
         console.log("✅ Filtered Transactions:", filteredTxs);
