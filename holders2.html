@@ -174,20 +174,20 @@
                 }
             });
 
-    console.log("Table 1 Loaded, Adding Click Listeners...");
+            console.log("Table 1 Loaded, Adding Click Listeners...");
+        
+            // Attach click event to all rows AFTER they are created
+            document.querySelectorAll("#holdersTable tbody tr").forEach(row => {
+                row.addEventListener("click", function () {
+                    let holderKey = this.dataset.holderKey; // Retrieve stored key
+                    console.log(`🖱 Clicked Row v5, Key: ${holderKey}`);
+                    showLastTx(holderKey, lastTxData);
+                });
+            });
 
-    // Attach click event to all rows AFTER they are created
-    document.querySelectorAll("#holdersTable tbody tr").forEach(row => {
-        row.addEventListener("click", function () {
-            let holderKey = this.dataset.holderKey; // Retrieve stored key
-            console.log(`🖱 Clicked Row v5, Key: ${holderKey}`);
-            showLastTx(holderKey, lastTxData);
-        });
-    });
-
-    console.log("Click Events Attached");
+            console.log("Click Events Attached");
             
-    }
+        }
 
 
     function showLastTx(holderKey, lastTxData) {
@@ -262,17 +262,22 @@
         container.appendChild(lastTxTable);
 
         console.log("✅ Table 2 Updated");
+
+        console.log("Table 2 Loaded, Adding DblClick Listeners...");
+        
+        // Attach click event to all rows AFTER they are created
+        document.querySelectorAll("#lastTxTable tbody tr").forEach(row => {
+            row.addEventListener("dblclick", function () {
+                console.log(`🖱 DblClicked Row`);
+                showHolders();
+            });
+        });
+        
     }
 
-    console.log("Table 2 Loaded, Adding DblClick Listeners...");
 
-    // Attach click event to all rows AFTER they are created
-    document.querySelectorAll("#lastTxTable tbody tr").forEach(row => {
-        row.addEventListener("dblclick", function () {
-            console.log(`🖱 DblClicked Row`);
-            showHolders();
-        });
-    });
+
+
 
   
     function showHolders() {
