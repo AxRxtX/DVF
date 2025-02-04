@@ -192,9 +192,38 @@
 
     function showLastTx(holderKey, lastTxData) {
 
-        document.getElementById("holdersTable").style.display = "none"; // Hide Table 1
-        document.getElementById("lastTxTable").style.display = "table"; // Show Table 2
+            // Hide Table 1
+            document.getElementById("holdersTable").style.display = "none"; 
         
+            // Ensure Table 2 is ready to be shown
+            let lastTxTable = document.getElementById("lastTxTable");
+        
+            // If Table 2 doesn't exist yet, create it
+            if (!lastTxTable) {
+                
+                // Create Table 2 and set its contents
+
+                const title = document.createElement("h1");
+                title.textContent = "NFT Eligibility";
+                container.appendChild(title); // Append the title to the container
+                
+                lastTxTable = document.createElement("table");
+                lastTxTable.id = "lastTxTable";
+                lastTxTable.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>NFT ID</th>
+                            <th>Age (Days)</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                `;
+                document.querySelector('.container').appendChild(lastTxTable);
+            }
+        
+            // Show Table 2
+            lastTxTable.style.display = "table";
+
         console.log("🔎 Filtering Transactions for:", holderKey);
     
         // Debug: Log LastTX first to verify data
@@ -202,40 +231,12 @@
     
         let filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey));
         filteredTxs = filteredTxs.sort((a, b) => b[5] - a[5]);
-
         
         console.log("✅ Filtered Transactions:", filteredTxs);
-    
-        const container = document.querySelector('.container'); // Get the main container
-        const holdersTable = document.getElementById("holdersTable");
-    
-        // Clear any existing tables in the container (including Table 1)
-        container.innerHTML = "";
-    
-        // Add the title for Table 2
-        const title = document.createElement("h1");
-        title.textContent = "NFT Eligibility";
-        container.appendChild(title); // Append the title to the container
-    
-        // Create a new Table 2 (filtered transactions)
-        const lastTxTable = document.createElement("table");
-        lastTxTable.id = "lastTxTable";
 
-        
-        lastTxTable.style.display = "table"; // Ensure Table 2 is visible
-        lastTxTable.innerHTML = `
-            <thead>
-                <tr>
-                    <th>NFT ID</th>
-                    <th>Age (Days)</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        `;
-    
         const lastTxTableBody = lastTxTable.querySelector("tbody");
-        
-       
+        lastTxTableBody.innerHTML = ""; // Clear previous rows (Table 2)
+
         // Populate Table 2 with filtered transactions
         if (filteredTxs.length === 0) {
             console.log("⚠️ No matching transactions found.");
