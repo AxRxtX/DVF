@@ -163,7 +163,7 @@ function showLastTx(holderKey, lastTxData) {
     console.log("📋 LastTX Data:", lastTxData);
 
     // Ensure filtering works by converting both to strings
-    const filteredTxs = lastTxData.filter(tx => String(tx[3]) === String(holderKey) && tx[7] === "");
+    const filteredTxs = lastTxData.filter(tx => String(tx[2]) === String(holderKey) && tx[6] === "");
 
     console.log("✅ Filtered Transactions:", filteredTxs);
 
