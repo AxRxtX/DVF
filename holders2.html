@@ -23,7 +23,9 @@
         margin-bottom: 24px;
         color: #D32F2F; /* Font color */
     }
-    
+
+
+        
     .table-container {
         display: flex;
         justify-content: center;
@@ -106,7 +108,9 @@
 <body>
     <div class="container">
         <h1>Holders Live Data</h1>
-
+        
+        <p id="navHelp" style="font-size: 12px; font-weight: bold; text-align: center;">-= click any row for details =-</p>
+        
         <!-- Table 1: Holders -->
         <table id="holdersTable">
             <thead>
@@ -194,9 +198,13 @@
 
             // Hide Table 1
             document.getElementById("holdersTable").style.display = "none"; 
+            // Update navHelp
+            document.getElementById("navHelp").innerText = "-= click any row to switch back to Holders list =-";
         
             // Ensure Table 2 is ready to be shown
             let lastTxTable = document.getElementById("lastTxTable");
+
+            
         
             // If Table 2 doesn't exist yet, create it
             if (!lastTxTable) {
@@ -289,6 +297,9 @@
         if (lastTxTable) {
             lastTxTable.style.display = "none"; // Hide Table 2
         }
+
+        // Update navHelp
+        document.getElementById("navHelp").innerText = "-= click any row for details =-";
     }
         
         
